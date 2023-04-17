@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="\javascript.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body style="text-align:center;">
     <div class="recognizer" style="text-align:center;">
@@ -69,5 +72,13 @@
     </div>
     <div class="timer" style="display:none;"></div>
     <div class="btn">Go!</div>
+    <div id="like_button_container"></div>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- Load our React component. -->
+    <script src="like_button.js" type="text/babel"></script>
 </body>
 </html>
