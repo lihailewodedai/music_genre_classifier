@@ -123,13 +123,29 @@
     }
 
 
-    function GoButton() {
+    function GoButton({styleDisplay, clickHandler}) {
+        console.log("style display")
+        console.log(styleDisplay)
         let styleBtn = {
             fontSize: '30vmin',
             lineHeight: '200%',
+            display: styleDisplay,
         }
 
-        function handleClick() {
+        return (
+            <>
+                <div style={styleBtn} className="Go-Btn" onClick={clickHandler}>Go</div>
+            </>
+        )
+    }
+
+    let GoBtn = function GoBtnComponent() {
+        const [showBtn, setShowBtn] = useState("block");
+        const showButton = showBtn;
+        console.log("show button")
+        console.log(showButton)
+
+        function handleClickBtn() {
             const element = document.querySelector('.timer')
             //inistialise
             let timer = 0
@@ -145,18 +161,20 @@
                 console.log(timer)
                 element.innerHTML = timer
             }, 1000)
+
+            setShowBtn("none")
         }
 
         return (
             <>
-                <div style={styleBtn} className="Go-Btn" onClick={handleClick}>Go Btn</div>
+                <GoButton styleDisplay={showButton} clickHandler={() => handleClickBtn()} />
             </>
-        )
+        );
+
     }
 
-
     const buttonContainer = createRoot(document.querySelector('.button-container'));
-    buttonContainer.render(<GoButton />)
+    buttonContainer.render(<GoBtn />)
     // Render your React component instead
     const root = createRoot(document.querySelector('.header'));
     root.render(<HeaderTitle />)
