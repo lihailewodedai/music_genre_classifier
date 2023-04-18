@@ -9,24 +9,17 @@
     <title>Document</title>
     <!-- main javascript -->
     <script src="/src/javascript.js"></script>
-    
-    <!-- Load babel inline JSX precompiler -->
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
     <!-- Style sheet -->
     <link rel="stylesheet" href="/src/style/style.css">
-
-    
 </head>
 <body style="text-align:center;">
     <div class="header">
-        <span class="title">Sound Recgonizer</span>
-        <script src="/src/reactComponent/like_button.js" type="text/babel"></script>
+        <!-- <script src="/like_button.js" type="text/babel"></script> -->
     </div>
 
     <div class="body-container">
         <!-- Recgonizer connection -->
-        <div class="recognizer-container" style="display: none">
+        <div class="recognizer-container">
             <div class="recognizer" style="text-align:center;">
                 <div>Teachable Machine Audio Model</div>
                 <div id="label-container"></div>
@@ -87,24 +80,90 @@
                 </script>        
             </div>
             <div class="timer" style="display:none;"></div>
-            <div class="btn">Go!</div>    
+            <div class="btn">Go</div>    
         </div>
-        
-        <!-- Load react -->
-        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <div class="button-container"></div>
 
-        <!-- Load our React component. -->
-        <script src="/src/reactComponent/like_button.js" type="text/babel"></script>
-
-
-        <div id="like_button_container"></div>
         <div class="wheel-chart-container"></div>
         <div class="Percentage-chart-container"></div>
     </div>
 
     <div class="bottom-container"></div>
-
-
 </body>
+
+<!-- Load react -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react?dev",
+        "react-dom/client": "https://esm.sh/react-dom/client?dev"
+      }
+    }
+</script>
+<script type="text/babel" data-type="module">
+    import React, { StrictMode } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { useState, useEffect } from 'react';
+    import { Component } from 'react';
+
+    function HeaderTitle() {
+        const styleHeader = {
+            color: 'rgb(142, 142, 142)',
+            fontSize: 50,
+            lineHeight: '250%',
+        }
+
+        return (
+            <>
+              <span style={styleHeader} className="header-title">Sound Classifier</span>
+            </>
+          );
+    }
+
+
+    function GoButton() {
+        let styleBtn = {
+            fontSize: '30vmin',
+            lineHeight: '200%',
+        }
+
+        function handleClick() {
+            const element = document.querySelector('.timer')
+            //inistialise
+            let timer = 0
+            element.style.display = 'block'
+            element.innerHTML = timer
+
+            //Trigger recognizer
+            init()
+
+            //Timing
+            setInterval(() => {
+                timer += 1
+                console.log(timer)
+                element.innerHTML = timer
+            }, 1000)
+        }
+
+        return (
+            <>
+                <div style={styleBtn} className="Go-Btn" onClick={handleClick}>Go Btn</div>
+            </>
+        )
+    }
+
+
+    const buttonContainer = createRoot(document.querySelector('.button-container'));
+    buttonContainer.render(<GoButton />)
+    // Render your React component instead
+    const root = createRoot(document.querySelector('.header'));
+    root.render(<HeaderTitle />)
+
+
+</script>
+
+
+
 </html>
