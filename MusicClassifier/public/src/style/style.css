@@ -1,0 +1,21 @@
+body { margin: 0; }
+
+.header {
+    height: 15vmin;
+}
+
+.title{
+    color: rgb(142, 142, 142);
+    font-size: 50px;
+    line-height: 250%;
+}
+
+.body-container {
+    height: 90vmin;
+    background-color: rgb(241, 241, 241);
+    margin: 0%;
+}
+
+.bottom-container {
+    height:10vmin;
+}
