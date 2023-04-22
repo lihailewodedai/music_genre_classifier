@@ -10,12 +10,10 @@ function BarChartContainer({category, percentage, color, id}) {
     const categoryPercentage = category+"-percentage"
 
     if (!percentage) {
-        console.log("yes")
         percentage = 0
     }
 
     const descriptionStyle = {
-        backGround: "#FFFFFF",
         border: "2px solid #8338EC",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         borderRadius: "5px",
@@ -23,29 +21,31 @@ function BarChartContainer({category, percentage, color, id}) {
         maxWidth:"17vmin",
         minHeight:"4vmin",
         marginRight:"auto",
-        marginLeft:"2vmin",
+        marginLeft:"3vmin",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding:"0",
+        color:color,
+        background: "white",
     }
 
     const barBoxStyle = {
-        backGround: "#FFFFFF",
-        border: "2px solid #8338EC",
+        border: "2px solid #ff0054",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         minWidth:"17vmin",
         maxWidth:"17vmin",
         minHeight:"4vmin",
         borderRadius: "5px",
         minWidth:"40vmin",
-        marginRight:"2vmin",
+        marginRight:"3vmin",
         marginLeft:"auto",
         padding:"0",
         alignSelf:"flex-end",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        background: "white",
     }
 
     const categoryPercentageStyle = {
@@ -56,6 +56,8 @@ function BarChartContainer({category, percentage, color, id}) {
         paddingLeft:"1.3vmin",
         minWidth:"10%",
         maxWidth:"10%",
+        background: "white",
+        color:color,
     }
 
 
@@ -81,9 +83,10 @@ function BarChartContainer({category, percentage, color, id}) {
                     transition={{ type:"inertia", velocity: 100 }}
                     animate={{ width:`${30.5*(percentage)}vmin` }}
                     style={{
-                        border: "2px solid #8338EC",
+                        border: "2px solid",
                         marginRight:"auto",
                         marginLeft:"4%",
+                        borderColor: color,
                     }}
                 >
                 </motion.div>

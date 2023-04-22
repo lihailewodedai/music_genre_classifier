@@ -4,7 +4,9 @@ import { motion, AnimatePresence, useMotionValue, useTransform, animate, useIsPr
 import { createRoot } from 'react-dom/client';
 import RecognizerListener from './RecognizerListener';
 import BarChartContainer from './BarChart';
-
+import SettingButtonContainer from './SettingButton';
+import SettingPageContainer from './SettingPage';
+import ListenerSwitch from './listenerSwitch';
 // import * as 
 
 function DataVisContainer({showButton}) {
@@ -15,6 +17,7 @@ function DataVisContainer({showButton}) {
 
     const [seconds, setSeconds] = useState(0)
 
+    const [listenerOn, setListener] = useState(true)
 
     return (
         <div style={
@@ -24,13 +27,16 @@ function DataVisContainer({showButton}) {
                 justifyContent: 'center',
             }
         }>
-            <RecognizerListener seconds={seconds} setSeconds={setSeconds} scores={scores} setScores={setScores}/>
-            <DataVisDiv blurRadius={blurRadius} scores={scores}/>
+            <RecognizerListener seconds={seconds} setSeconds={setSeconds} scores={scores} setScores={setScores} listenerOn={listenerOn}/>
+            <DataVisDiv blurRadius={blurRadius} scores={scores} listenerOn={listenerOn} setListener={setListener}/>
         </div>
     )
 }
 
-function DataVisDiv({blurRadius, scores}) {
+function DataVisDiv({blurRadius, scores, listenerOn, setListener}) {
+
+    const [displaySetting, setDisplaySetting] = useState(false)
+
 
     const styleDataVisualDiv = {
         borderStyle: "none",
@@ -44,11 +50,8 @@ function DataVisDiv({blurRadius, scores}) {
         display: 'flex',
         flexDirection: "column",
         alignItems: 'center',
-
     }
 
-    console.log(`data vis div ${scores}`)
-    console.log(scores)
 
     return (
         <AnimatePresence>
@@ -64,7 +67,7 @@ function DataVisDiv({blurRadius, scores}) {
                 <div className='div-header' style={{
                     borderBottomStyle:"solid",
                     borderBottomWidth:"1px",
-                    width:"95%",
+                    width:"100%",
                     height:"8vmin",
                     display: 'flex',
                     justifyContent: 'center',
@@ -72,25 +75,36 @@ function DataVisDiv({blurRadius, scores}) {
                     color: "rgb(142, 142, 142)",
                     fontSize: "3vmin",
                 }}>
-                    <span
-                        style={{
-                            marginRight:"auto",
-                        }}
-                    >percentages</span>
+                    <span style={{marginRight:"auto", marginLeft:"3vmin",}}>
+                        percentages
+                    </span>
+                    
+                    <SettingButtonContainer setDisplay={setDisplaySetting} display={displaySetting}/>
+                
                 </div>
-                {/* Body div */}
+
+                {/* chart body div */}
                 <div className='body-container' style={{
                     width:"100%",
                     height:"80%",
                     background:"white",
+                    background:"#4C91FE",
+                    borderBottom:"solid",
+                    borderWidth:"1px",
+                    borderColor:"rgb(142, 142, 142)",
                 }}>
-                    <BarChartContainer category={"Background noise"} percentage={ scores[0] } color={"#FF9696"} id={0}/>
-                    <BarChartContainer category={"Caugh"} percentage={ scores[1] } color={"#FF9696"} id={1}/>
-                    <BarChartContainer category={"Clap"} percentage={ scores[2] } color={"#FF9696"} id={2}/>
-                    <BarChartContainer category={"Hamming"} percentage={ scores[3] } color={"#FF9696"} id={3}/>
-                    <BarChartContainer category={"Snap"} percentage={ scores[4] } color={"#FF9696"} id={4}/>
-                    <BarChartContainer category={"Whistle"} percentage={ scores[5] } color={"#FF9696"} id={5}/>
+                    <BarChartContainer category={"Background noise"} percentage={ scores[0] } color={"#FF8F0B"} id={0}/>
+                    <BarChartContainer category={"Caugh"} percentage={ scores[1] } color={"#FF006E"} id={1}/>
+                    <BarChartContainer category={"Clap"} percentage={ scores[2] } color={"#FB5607"} id={2}/>
+                    <BarChartContainer category={"Hamming"} percentage={ scores[3] } color={"#0a9396"} id={3}/>
+                    <BarChartContainer category={"Snap"} percentage={ scores[4] } color={"#8338EC"} id={4}/>
+                    <BarChartContainer category={"Whistle"} percentage={ scores[5] } color={"#ef233c"} id={5}/>
+
+                    <ListenerSwitch listenerOn={listenerOn} setListener={setListener}/>
                 </div>
+
+                {/* settingpage */}
+                <SettingPageContainer setDisplay={setDisplaySetting} display={displaySetting} />
             </motion.div>
         </AnimatePresence>
     )
