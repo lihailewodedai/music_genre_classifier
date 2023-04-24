@@ -6,7 +6,7 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
-	fs := http.FileServer(http.Dir("sound-classifier/public"))
+	fs := http.FileServer(http.Dir("sound-classifier"))
 	mux.Handle("/", fs)
 	http.ListenAndServe(":8080", mux)
 }
